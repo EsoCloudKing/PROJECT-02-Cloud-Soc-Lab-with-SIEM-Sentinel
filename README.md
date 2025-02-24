@@ -3,7 +3,7 @@
  **Cloud SOC Lab for Advanced Security: Threat Detection and Response with SIEM (Microsoft Sentinel) Implementation**.
  
  ## Objective
-  TThis project is to design, implement, and showcase a comprehensive Security Operations Center (SOC) lab in the cloud. This SOC lab will leverage Microsoft Sentinel to provide advanced threat detection, real-time monitoring, and automated response capabilities. The project aims to demonstrate proficiency in setting up a cloud-based SOC environment, integrating various data sources, implementing Analytic rules for threat detection, workbook for threat visualization, Threat Intelligence Integration such as threat feed  and watch lists to track and monitor indicators of compromise (IOCs) and automating incident response workflows with Logic Apps.
+  This project is to design, implement, and showcase a comprehensive Security Operations Center (SOC) lab in the cloud. This SOC lab will leverage Microsoft Sentinel to provide advanced threat detection, real-time monitoring, and automated response capabilities. The project aims to demonstrate proficiency in setting up a cloud-based SOC environment, integrating various data sources, implementing Analytic rules for threat detection, workbook for threat visualization, Threat Intelligence Integration such as threat feed  and watch lists to track and monitor indicators of compromise (IOCs) and automating incident response workflows with Logic Apps in either real time or simulated alerts.
 
   ## Skills Learned
   - __Cloud Infrastructure Setup__: Proficiency in deploying and configuring virtual machines, storage accounts, and network security groups in Azure. Ability to manage and organize cloud resources effectively using Azure Resource Manager (ARM) templates and Azure portal.
