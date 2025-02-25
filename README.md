@@ -38,6 +38,7 @@ Provisioned Another Virtual machine in a different subnet and deployed ngix webs
 ![powershell ping](https://github.com/user-attachments/assets/296e2974-015f-40ce-826d-362b30c7bbff)
 
 
+
 - **Step 2: Log Forwarding and KQL**
 Created Log Analytics Workspace, Created a Sentinel Instance and connected it to Log Analytics.
 Configured the “Windows Security Events via AMA”, storage account and Azure activity connectors in sentinel.
@@ -60,16 +61,23 @@ When I queried the SecurityEvent logs in the Log Analytics Workspace; there is n
 So i imported a pre-downloaded geoip spreadsheet (as a “Sentinel Watchlist”) which contains geographic information for each block of IP addresses which is about 54,000 rows.
 A watchlist was created and this csv file uploaded to the watch list to enrich our query data.
 In actual datacenter settings, this location data would come from a live source or it would be updated automatically on the back end by any service provider we decide to use.
-
-   **Image4a** Watchlist
-  ![watchlist](https://github.com/user-attachments/assets/6275e7ed-32ea-4385-af91-74a5d5101792)
-
-
 Using this watchlist the query result will display the location, latitude, country etc of the concerned IP of interest as opposed to when the watchlist was not created as dipicted in the image below;
+   
+   **Image4** Watchlist KQL displaying location of IP addresses involved in the alerts or incedence.
+   ![real geoip with my ip](https://github.com/user-attachments/assets/4290e154-b777-4e86-a944-588b9703abe6)
+ 
+- **Step 5: Workbook (Attack Map Creation)**
+Microsoft Sentinel workbooks provide powerful data visualization and monitoring capabilities, allowing for easy analysis and insight into security events and incidents.
+In sentinel, a new workbook was created and   the advanced editor tab was prepopulated by a preconfigured KQL in JSON format to display the image below. Giving us the location of IPs and counts of alerts in Visual form which is a Map.
 
- **Image4b**
+**Image5:** Attack Map
 
- ![real geoip with my ip](https://github.com/user-attachments/assets/4290e154-b777-4e86-a944-588b9703abe6)
+
+
+
+
+
+ 
 
 
 
