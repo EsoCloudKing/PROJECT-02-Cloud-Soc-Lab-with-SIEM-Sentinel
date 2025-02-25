@@ -25,10 +25,12 @@
 - **Step 1: Provisioning of resources that is to be monitored**
 
 A virtual network was provisioned with Network security configured to allow all ports (RDP, SSH, HTTP, HTTPS) for inbound traffic.
-An Azure virtual machine to be used somehow as a honey pot to observe and respond to alerts especially windows event 4625(Failed log on). All ports were opened for this VM (RDP, SSH, HTTP, HTTPS)after which, I logged in via RDP virtual machine and turned off the windows firewall (start -> wf.msc -> properties -> all off). Pinged the virtual machine with powershell to confirm its reachability from any network.
-A storage account with security settings relaxed to allow for more security events. Anonymous access on blobs and files was enabled; permitted scope of copy operation from any storage account and cross tenant replication was enabled. Public network access from all networks was also enabled. These settings were configured for the purpose of this lab to generate more alerts for triage and response with a SIEM solution (Sentinel)
-Provisioned Another Virtual machine in a different subnet and deployed ngix webserver which will be monitored too.
 
+An Azure virtual machine to be used somehow as a honey pot to observe and respond to alerts especially windows event 4625(Failed log on). All ports were opened for this VM (RDP, SSH, HTTP, HTTPS)after which, I logged in via RDP virtual machine and turned off the windows firewall (start -> wf.msc -> properties -> all off). Pinged the virtual machine with powershell to confirm its reachability from any network.
+
+A storage account with security settings relaxed to allow for more security events. Anonymous access on blobs and files was enabled; permitted scope of copy operation from any storage account and cross tenant replication was enabled. Public network access from all networks was also enabled. These settings were configured for the purpose of this lab to generate more alerts for triage and response with a SIEM solution (Sentinel)
+
+Provisioned a web server on a separate virtual machine within a distinct subnet, deployed the Nginx web server, and configured it for continuous monitoring.
 
 **IMAGE 1a:** NSG rules 
 ![NSG4](https://github.com/user-attachments/assets/ba9e8cd3-17ef-4ed5-b490-61bb49548bc6)
