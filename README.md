@@ -29,13 +29,14 @@ An Azure virtual machine to be used somehow as a honey pot to observe and respon
 A storage account with security settings relaxed to allow for more security events. Anonymous access on blobs and files was enabled; permitted scope of copy operation from any storage account and cross tenant replication was enabled. Public network access from all networks was also enabled. These settings were configured for the purpose of this lab to generate more alerts for triage and response with a SIEM solution (Sentinel)
 Provisioned Another Virtual machine in a different subnet and deployed ngix webserver which will be monitored too.
 
-##IMAGE 1a: NSG rules 
 
+**IMAGE 1a:** NSG rules 
 ![NSG4](https://github.com/user-attachments/assets/ba9e8cd3-17ef-4ed5-b490-61bb49548bc6)
 
 ##Image 1b: VM network test from public network
 
 ![powershell ping](https://github.com/user-attachments/assets/296e2974-015f-40ce-826d-362b30c7bbff)
+
 
 
 
@@ -52,10 +53,13 @@ Then I Queried for logs within the log Analytics workspace to make sure it is re
 
 
 
+
 - **Step 3:** Analytics rule creation
 
 
-- **Step 4: Created a Watchlist for Log Enrichment and Finding Location Data of any suspeted Attacker**
+
+
+- **Step 4: Created a Watchlist for log enrichment and geolocation analysis to identify and track suspected attackers.**
 
 When I queried the SecurityEvent logs in the Log Analytics Workspace; there is no location data, only IP address, which we can use to derive the location data.
 So i imported a pre-downloaded geoip spreadsheet (as a “Sentinel Watchlist”) which contains geographic information for each block of IP addresses which is about 54,000 rows.
@@ -63,7 +67,7 @@ A watchlist was created and this csv file uploaded to the watch list to enrich o
 In actual datacenter settings, this location data would come from a live source or it would be updated automatically on the back end by any service provider we decide to use.
 Using this watchlist the query result will display the location, latitude, country etc of the concerned IP of interest as opposed to when the watchlist was not created as dipicted in the image below;
    
-   **Image4** Watchlist KQL displaying location of IP addresses involved in the alerts or incedence.
+   **Image4** *Watchlist KQL displaying location of IP addresses involved in the alerts or incedence*.
    ![real geoip with my ip](https://github.com/user-attachments/assets/4290e154-b777-4e86-a944-588b9703abe6)
  
 
@@ -71,9 +75,9 @@ Using this watchlist the query result will display the location, latitude, count
 Microsoft Sentinel workbooks provide powerful data visualization and monitoring capabilities, allowing for easy analysis and insight into security events and incidents.
 In sentinel, a new workbook was created and   the advanced editor tab was prepopulated by a preconfigured KQL in JSON format to display the image below. Giving us the location of IPs and counts of alerts in Visual form which is a Map.
 
-After subjecting our network to public exposure and potential intrusions for approximately 48 hours, the attack map has provided valuable insights into the nature and extent of the observed cyber threats.
+After subjecting our network to public exposure and potential intrusions for approximately 48 hours, the attack map has provided valuable insights into the nature and extent of the observed cyber threats observed in the image below;
 
-**Image5:** Attack Map ![attack map](https://github.com/user-attachments/assets/905f950a-6a73-4911-a783-e576b0f790ba)
+**Image5:** *Attack Map* ![attack map](https://github.com/user-attachments/assets/905f950a-6a73-4911-a783-e576b0f790ba)
 
 
    
