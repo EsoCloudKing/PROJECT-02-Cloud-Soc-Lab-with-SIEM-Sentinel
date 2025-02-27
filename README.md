@@ -115,6 +115,8 @@ Using this watchlist the query result will display the location, latitude, count
    ![real geoip with my ip](https://github.com/user-attachments/assets/4290e154-b777-4e86-a944-588b9703abe6)
  
 
+
+
 - **Step 5: Workbook (Attack Map Creation)**
 Microsoft Sentinel workbooks provide powerful data visualization and monitoring capabilities, allowing for easy analysis and insight into security events and incidents.
 In sentinel, a new workbook was created and   the advanced editor tab was prepopulated by a preconfigured KQL in JSON format to display the image below. Giving us the location of IPs and counts of alerts in Visual form which is a Map.
@@ -124,6 +126,10 @@ After subjecting our network to public exposure and potential intrusions for app
 **Image5:** *Attack Map* ![attack map](https://github.com/user-attachments/assets/905f950a-6a73-4911-a783-e576b0f790ba)
 
 
+   
+  
+   
+   
    
    ## CONCLUSION
 
