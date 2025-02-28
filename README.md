@@ -7,6 +7,7 @@
 
   ## Skills Learned
   - __Cloud Infrastructure Setup__: Proficiency in deploying and configuring virtual machines, storage accounts, and network security groups in Azure. Ability to manage and organize cloud resources effectively using Azure Resource Manager (ARM) templates and Azure portal.
+  - __Identitiy And Access Management( Microsoft Entra ID)__ Gained proficiency in Identity and Access Management (IAM) using Microsoft Entra ID (formerly Azure Active Directory), including user provisioning, RBAC role assignment, and log integration with Sentinel for enhanced security monitoring.
   - __Webserver Deployment:__ Proficient in deploying and configuring web servers, such as Nginx, on Azure VMs to ensure optimal performance and scalability in cloud environments.
   - __SIEM Implementation__:Expertise in setting up Microsoft Sentinel in a Log Analytics workspace. Integration of multiple data sources (e.g., Azure Activity Logs, SecurityEvent, network logs, storage logs) into Microsoft Sentinel for centralized monitoring.
   - __KQL__: Use of Kusto Query Language (KQL) to query, analyze, and visualize security logs and events.
@@ -14,8 +15,9 @@
     
 
   ### Tools Used For this Project
-- __Microsoft Visio__ for diagram mapping.
+- __Draw.io__ for diagram mapping.
 - __Azure Portal:__ To manage and configure Azure resources, such as virtual machines, storage accounts, and virtual networks, NSGs, Storage Account.
+- __Microsoft Entra ID:__Utilized Microsoft Entra ID for robust identity and access management, including user provisioning, RBAC role assignment, and secure integration of sign-in and audit logs with Microsoft Sentinel for comprehensive security monitoring.
 - __Microsoft Sentinel:__ The primary SIEM solution for log collection, analysis, threat detection, and incident response. Watchlist, Analytic Rules, Azure Logic Apps were explored.
 - __Log Analytics Workspace:__ For collecting and analyzing log data from various sources.
 - __Kusto Query Language (KQL):__ To query, analyze, and visualize log data in the Log.
@@ -51,8 +53,8 @@ Provisioned a web server on a separate virtual machine within a distinct subnet,
 
 - **Step 3: Log Forwarding and KQL**
 Created Log Analytics Workspace, Created a Sentinel Instance and connected it to Log Analytics.
-Configured the “Windows Security Events via AMA”, storage account and Azure activity connectors in sentinel.
-Created the DCR within sentinel for the webserver and VM, configured diagnostic settings in storage account for log collection in sentinel
+Configured the “Windows Security Events via AMA”, storage account, Azure activity and Microsoft Entra ID connectors in sentinel.
+Created the DCR within sentinel for the webserver and VM, configured diagnostic settings in storage account and Entra ID for log collection in sentinel.
 Then I Queried for logs within the log Analytics workspace to make sure it is receiving logs (SecurityEvent
 | where EventId == 4625) and this returned some nuber of entries after delibrate failed log on to the Vms.
 
@@ -71,6 +73,7 @@ Then I Queried for logs within the log Analytics workspace to make sure it is re
  Developed and implemented three analytic rules in Microsoft Sentinel, to proactively detect and respond to security alerts by leveraging custom KQL queries for comprehensive threat detection and mitigation. These alerts will be automatically aggregated into incidents in Microsoft Sentinel as they are generated, enabling streamlined monitoring and rapid incident response.
 
  First analytic rule is to trigger an alert when a paricular computer or account has 2 failed log on events (EventID 4625). 
+
 SecurityEvent
 
 | where EventID == “4625” 
@@ -80,6 +83,7 @@ SecurityEvent
 | sort by TimeGenerated desc
 
 The second analytic rule for Azure activity table, is to trigger an alert when any VM, Vnet, Storage account is deleted or created:
+
 AzureActivity
 
 | where Resource in ("Microsoft.Storage/storageAccounts", "Microsoft.Compute/virtualMachines", "Microsoft.Network/virtualNetworks")
@@ -91,12 +95,19 @@ AzureActivity
 | sort by TimeGenerated desc
 
 The third analytic rule for storagebloblogs, is to trigger an alert for any unauthorized blob deletion or upload operation across all storage accounts within our targeted subscription, enhancing our security posture and incident response:
+
 StorageBlobLogs
 
 | where OperationName in ("PutBlob", "PutBlockBlob", "DeleteBlob")
 | where StatusCode in (201, 202)
 | project TimeGenerated, OperationName, CallerIpAddress, StatusText
 | sort by TimeGenerated desc
+
+The fourth analytic rule for SigninLogs
+
+SigninLogs
+
+
 
 Following several hours of operation, our environment has generated multiple alerts, which have been aggregated into incidents in Microsoft Sentinel, in accordance with the configured analytic rules as shown in the image below;
 **Image3**
