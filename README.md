@@ -106,19 +106,33 @@ StorageBlobLogs
 The fourth analytic rule for SigninLogs in Microsoft Entra ID consist of four types of rules which are Brute force attack, passwordspray attack, Unsusall location and MFA Bypass attack. These rules can be configured separately but the he queries are unified into a single analytic rule using the let and union operators in KQL.
 
 let BruteForce = SigninLogs
+
 | summarize Count = count() by IPAddress, bin(TimeGenerated, 1h)
+
 | where Count > 10;
+
 let PasswordSpray = SigninLogs
+
 | where ResultType == 50053
+
 | summarize Count = count() by UserPrincipalName, bin(TimeGenerated, 1h)
+
 | where Count > 5;
+
 let UnusualLocation = SigninLogs
+
 | where ResultType == 0
+
 | summarize Count = count() by UserPrincipalName, Location
+
 | where Count == 1;
+
 let MFABypass = SigninLogs
+
 | where AuthenticationRequirement == "MFA"
+
 | where ResultType != 0;
+
 union BruteForce, PasswordSpray, UnusualLocation, MFABypass
 
 
