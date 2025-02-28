@@ -77,9 +77,13 @@ Then I Queried for logs within the log Analytics workspace to make sure it is re
 SecurityEvent
 
 | where EventID == “4625” 
+
 | summarize FailedLogons = count() by Computer, Account, bin(TimeGenerated, 1h)
+
 | where FailedLogons >= 2
+
 | project TimeGenerated, Computer, Account, FailedLogons, IpAddress
+
 | sort by TimeGenerated desc
 
 The second analytic rule for Azure activity table, is to trigger an alert when any VM, Vnet, Storage account is deleted or created:
@@ -87,11 +91,15 @@ The second analytic rule for Azure activity table, is to trigger an alert when a
 AzureActivity
 
 | where Resource in ("Microsoft.Storage/storageAccounts", "Microsoft.Compute/virtualMachines", "Microsoft.Network/virtualNetworks")
+
 | where OperationName in ("Microsoft.Storage/storageAccounts/write", "Microsoft.Storage/storageAccounts/delete", 
                          "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/delete", 
                          "Microsoft.Network/virtualNetworks/write", "Microsoft.Network/virtualNetworks/delete")
+
 | where ActivityStatusValue == "Succeeded"
+
 | project TimeGenerated, OperationName, ResourceId, Caller, CallerIpAddress, ResourceGroup, SubscriptionId
+
 | sort by TimeGenerated desc
 
 The third analytic rule for storagebloblogs, is to trigger an alert for any unauthorized blob deletion or upload operation across all storage accounts within our targeted subscription, enhancing our security posture and incident response:
@@ -99,8 +107,12 @@ The third analytic rule for storagebloblogs, is to trigger an alert for any unau
 StorageBlobLogs
 
 | where OperationName in ("PutBlob", "PutBlockBlob", "DeleteBlob")
+
+
 | where StatusCode in (201, 202)
+
 | project TimeGenerated, OperationName, CallerIpAddress, StatusText
+
 | sort by TimeGenerated desc
 
 The fourth analytic rule for SigninLogs in Microsoft Entra ID consist of four types of rules which are Brute force attack, passwordspray attack, Unsusall location and MFA Bypass attack. These rules can be configured separately but the he queries are unified into a single analytic rule using the let and union operators in KQL.
