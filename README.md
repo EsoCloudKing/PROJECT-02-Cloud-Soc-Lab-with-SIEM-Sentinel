@@ -45,7 +45,11 @@ Provisioned a web server on a separate virtual machine within a distinct subnet,
 
 
 
-- **Step 2: Log Forwarding and KQL**
+- **Step 2: Configure IAM (Microsoft Entra ID)**
+
+   For the purpose of this project, several users were created in Microsoft Entra ID, each assigned unique passwords for sign-ins and appropriate RBAC roles to ensure proper access control. To facilitate comprehensive log collection and analysis, diagnostic settings were configured to send Audit and Sign-in logs to the designated Log Analytics workspace. A P2 trial license was obtained to enable advanced security features. In the subsequent steps, the Log Analytics Contributor role will be assigned to Microsoft Sentinel after installing the Entra ID connector, ensuring seamless integration, effective log collection and management. Several Analytics rule will also be configured to detect password spray, brute force attack, MFA account bypass, unusual location sign etc.
+
+- **Step 3: Log Forwarding and KQL**
 Created Log Analytics Workspace, Created a Sentinel Instance and connected it to Log Analytics.
 Configured the “Windows Security Events via AMA”, storage account and Azure activity connectors in sentinel.
 Created the DCR within sentinel for the webserver and VM, configured diagnostic settings in storage account for log collection in sentinel
@@ -62,12 +66,13 @@ Then I Queried for logs within the log Analytics workspace to make sure it is re
 
 
 
-- **Step 3: Analytics rule creation**
+- **Step 4: Analytics rule creation**
 
  Developed and implemented three analytic rules in Microsoft Sentinel, to proactively detect and respond to security alerts by leveraging custom KQL queries for comprehensive threat detection and mitigation. These alerts will be automatically aggregated into incidents in Microsoft Sentinel as they are generated, enabling streamlined monitoring and rapid incident response.
 
  First analytic rule is to trigger an alert when a paricular computer or account has 2 failed log on events (EventID 4625). 
 SecurityEvent
+
 | where EventID == “4625” 
 | summarize FailedLogons = count() by Computer, Account, bin(TimeGenerated, 1h)
 | where FailedLogons >= 2
@@ -76,6 +81,7 @@ SecurityEvent
 
 The second analytic rule for Azure activity table, is to trigger an alert when any VM, Vnet, Storage account is deleted or created:
 AzureActivity
+
 | where Resource in ("Microsoft.Storage/storageAccounts", "Microsoft.Compute/virtualMachines", "Microsoft.Network/virtualNetworks")
 | where OperationName in ("Microsoft.Storage/storageAccounts/write", "Microsoft.Storage/storageAccounts/delete", 
                          "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/delete", 
@@ -86,6 +92,7 @@ AzureActivity
 
 The third analytic rule for storagebloblogs, is to trigger an alert for any unauthorized blob deletion or upload operation across all storage accounts within our targeted subscription, enhancing our security posture and incident response:
 StorageBlobLogs
+
 | where OperationName in ("PutBlob", "PutBlockBlob", "DeleteBlob")
 | where StatusCode in (201, 202)
 | project TimeGenerated, OperationName, CallerIpAddress, StatusText
@@ -103,7 +110,7 @@ Following several hours of operation, our environment has generated multiple ale
 
 
 
-- **Step 4: Created a Watchlist for log enrichment and geolocation analysis to identify and track suspected attackers.**
+- **Step 5: Created a Watchlist for log enrichment and geolocation analysis to identify and track suspected attackers.**
 
 When I queried the SecurityEvent logs in the Log Analytics Workspace; there is no location data, only IP address, which we can use to derive the location data.
 So i imported a pre-downloaded geoip spreadsheet (as a “Sentinel Watchlist”) which contains geographic information for each block of IP addresses which is about 54,000 rows.
@@ -117,7 +124,7 @@ Using this watchlist the query result will display the location, latitude, count
 
 
 
-- **Step 5: Workbook (Attack Map Creation)**
+- **Step 6: Workbook (Attack Map Creation)**
 Microsoft Sentinel workbooks provide powerful data visualization and monitoring capabilities, allowing for easy analysis and insight into security events and incidents.
 In sentinel, a new workbook was created and   the advanced editor tab was prepopulated by a preconfigured KQL in JSON format to display the image below. Giving us the location of IPs and counts of alerts in Visual form which is a Map.
 
