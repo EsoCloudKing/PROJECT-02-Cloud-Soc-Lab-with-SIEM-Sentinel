@@ -49,7 +49,7 @@ Provisioned a web server on a separate virtual machine within a distinct subnet,
 
 - **Step 2: Configure IAM (Microsoft Entra ID)**
 
-   For the purpose of this project, several users were created in Microsoft Entra ID, each assigned unique passwords for sign-ins and appropriate RBAC roles to ensure proper access control. To facilitate comprehensive log collection and analysis, diagnostic settings were configured to send Audit and Sign-in logs to the designated Log Analytics workspace. A P2 trial license was obtained to enable advanced security features. In the subsequent steps, the Log Analytics Contributor role will be assigned to Microsoft Sentinel after installing the Entra ID connector, ensuring seamless integration, effective log collection and management. Several Analytics rule will also be configured to detect password spray, brute force attack, MFA account bypass, unusual location sign etc.
+   For the purpose of this project, several users were created in Microsoft Entra ID, each assigned unique passwords for sign-ins and appropriate RBAC roles to ensure proper access control. To facilitate comprehensive log collection and analysis, diagnostic settings were configured to send Audit and Sign-in logs to the designated Log Analytics workspace. A P2 trial license was obtained to enable advanced security features. In the subsequent steps, the Log Analytics Contributor role will be assigned to Microsoft Sentinel after installing the Entra ID connector, ensuring seamless integration, effective log collection and management. Several Analytics rule will also be configured to detect password spray, brute force attack, MFA account bypass, unusual location sign in etc.
 
 - **Step 3: Log Forwarding and KQL**
 Created Log Analytics Workspace, Created a Sentinel Instance and connected it to Log Analytics.
@@ -72,8 +72,8 @@ Then I Queried for logs within the log Analytics workspace to make sure it is re
 
  Developed and implemented three analytic rules in Microsoft Sentinel, to proactively detect and respond to security alerts by leveraging custom KQL queries for comprehensive threat detection and mitigation. These alerts will be automatically aggregated into incidents in Microsoft Sentinel as they are generated, enabling streamlined monitoring and rapid incident response.
 
- First analytic rule is to trigger an alert when a paricular computer or account has 2 failed log on events (EventID 4625). 
-
+ First analytic rule is ased on security event is to trigger alert when a paricular computer or account has 2 failed log on events (EventID 4625). 
+ 
 SecurityEvent
 
 | where EventID == “4625” 
@@ -103,9 +103,24 @@ StorageBlobLogs
 | project TimeGenerated, OperationName, CallerIpAddress, StatusText
 | sort by TimeGenerated desc
 
-The fourth analytic rule for SigninLogs
+The fourth analytic rule for SigninLogs in Microsoft Entra ID consist of four types of rules which are Brute force attack, passwordspray attack, Unsusall location and MFA Bypass attack. These rules can be configured separately but the he queries are unified into a single analytic rule using the let and union operators in KQL.
 
-SigninLogs
+let BruteForce = SigninLogs
+| summarize Count = count() by IPAddress, bin(TimeGenerated, 1h)
+| where Count > 10;
+let PasswordSpray = SigninLogs
+| where ResultType == 50053
+| summarize Count = count() by UserPrincipalName, bin(TimeGenerated, 1h)
+| where Count > 5;
+let UnusualLocation = SigninLogs
+| where ResultType == 0
+| summarize Count = count() by UserPrincipalName, Location
+| where Count == 1;
+let MFABypass = SigninLogs
+| where AuthenticationRequirement == "MFA"
+| where ResultType != 0;
+union BruteForce, PasswordSpray, UnusualLocation, MFABypass
+
 
 
 
