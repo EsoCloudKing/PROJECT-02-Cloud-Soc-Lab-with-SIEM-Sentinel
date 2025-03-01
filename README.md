@@ -24,9 +24,10 @@
 - __Powershell:__ To ping Virtual machine.
 - __Diagnostic Settings__: To configure and send logs from Azure resources to the Log Analytics workspace.
 
-  **SCHEMATIC DIAGRAM OF THE PROJECT**
+    **SCHEMATIC DIAGRAM OF THE PROJECT**
 
-  ![Project diagram (1)](https://github.com/user-attachments/assets/ce4a200b-5693-4de3-918f-a5c818c5b251)
+  ![project diagram](https://github.com/user-attachments/assets/d5f5c389-0a2b-45cd-a33f-8d995b1c51f7)
+
 
 
 ## Steps
@@ -198,6 +199,8 @@ After subjecting our network to public exposure and potential intrusions for app
    ## CONCLUSION
 
 The "Cloud SOC Lab for Advanced Security: Threat Detection and Response with SIEM (Microsoft Sentinel) Implementation" project showcases my ability to design and implement a comprehensive Security Operations Center in the cloud. Through this project, I have demonstrated proficiency in cloud infrastructure setup, SIEM deployment, log analysis. By integrating multiple data sources and leveraging advanced security tools, I have developed a robust and intelligent threat detection and response system. This project not only highlights my technical expertise but also my commitment to enhancing cybersecurity through innovative solutions. My hands-on experience, capabilities and innovative approach in cloud security, threat intelligence, and real-time monitoring make me a valuable asset to any cybersecurity team.
+
+Additionally, this project demonstrates how Azure Key Vault and SQL Database logs can also be collected and monitored within the SOC lab for enhanced security.
 
 
 
