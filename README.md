@@ -24,6 +24,11 @@
 - __Powershell:__ To ping Virtual machine.
 - __Diagnostic Settings__: To configure and send logs from Azure resources to the Log Analytics workspace.
 
+  **SCHEMATIC DIAGRAM OF THE PROJECT**
+
+  ![Project diagram (1)](https://github.com/user-attachments/assets/ce4a200b-5693-4de3-918f-a5c818c5b251)
+
+
 ## Steps
 - **Step 1: Provisioning of resources that is to be monitored**
 
