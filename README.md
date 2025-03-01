@@ -26,7 +26,8 @@
 
     **SCHEMATIC DIAGRAM OF THE PROJECT**
 
-  ![project diagram](https://github.com/user-attachments/assets/d5f5c389-0a2b-45cd-a33f-8d995b1c51f7)
+  ![DRAW IO drawio 2 (2)](https://github.com/user-attachments/assets/4af2fb53-35c8-4927-84f2-ef45002ac41b)
+
 
 
 
@@ -200,7 +201,7 @@ After subjecting our network to public exposure and potential intrusions for app
 
 The "Cloud SOC Lab for Advanced Security: Threat Detection and Response with SIEM (Microsoft Sentinel) Implementation" project showcases my ability to design and implement a comprehensive Security Operations Center in the cloud. Through this project, I have demonstrated proficiency in cloud infrastructure setup, SIEM deployment, log analysis. By integrating multiple data sources and leveraging advanced security tools, I have developed a robust and intelligent threat detection and response system. This project not only highlights my technical expertise but also my commitment to enhancing cybersecurity through innovative solutions. My hands-on experience, capabilities and innovative approach in cloud security, threat intelligence, and real-time monitoring make me a valuable asset to any cybersecurity team.
 
-Additionally, this project demonstrates how Azure Key Vault and SQL Database logs can also be collected and monitored within the SOC lab for enhanced security.
+Additionally, this project demonstrates how other Azure resorces such as Azure Key Vault and SQL Database logs can also be collected and monitored within the SOC lab for enhanced security.
 
 
 
