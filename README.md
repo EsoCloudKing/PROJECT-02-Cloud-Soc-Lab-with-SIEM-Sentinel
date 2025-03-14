@@ -1,6 +1,4 @@
-# PROJECT NAME
- 
- **Cloud SOC Lab for Advanced Security: Threat Detection and Response with SIEM (Microsoft Sentinel) Implementation**.
+## **Cloud SOC Lab for Advanced Security: Threat Detection and Response with SIEM (Microsoft Sentinel) Implementation**.
  
  ## Objective
   This project is to design, implement, and showcase a comprehensive Security Operations Center (SOC) lab in the cloud. This SOC lab will leverage Microsoft Sentinel to provide advanced threat detection, real-time monitoring, and automated response capabilities. The project aims to demonstrate proficiency in setting up a cloud-based SOC environment, integrating various data sources, implementing Analytic rules for threat detection, workbook for threat visualization, Threat Intelligence Integration such as threat feed  and watch lists to track and monitor indicators of compromise (IOCs) and automating incident response workflows with Logic Apps in either real time or simulated alerts.
@@ -17,7 +15,7 @@
   ### Tools Used For this Project
 - __Draw.io__ for diagram mapping.
 - __Azure Portal:__ To manage and configure Azure resources, such as virtual machines, storage accounts, and virtual networks, NSGs, Storage Account.
-- __Microsoft Entra ID:__Utilized Microsoft Entra ID for robust identity and access management, including user provisioning, RBAC role assignment, and secure integration of sign-in and audit logs with Microsoft Sentinel for comprehensive security monitoring.
+- __Microsoft Entra ID:__ Utilized Microsoft Entra ID for robust identity and access management, including user provisioning, RBAC role assignment, and secure integration of sign-in and audit logs with Microsoft Sentinel for comprehensive security monitoring.
 - __Microsoft Sentinel:__ The primary SIEM solution for log collection, analysis, threat detection, and incident response. Watchlist, Analytic Rules, Azure Logic Apps were explored.
 - __Log Analytics Workspace:__ For collecting and analyzing log data from various sources.
 - __Kusto Query Language (KQL):__ To query, analyze, and visualize log data in the Log.
