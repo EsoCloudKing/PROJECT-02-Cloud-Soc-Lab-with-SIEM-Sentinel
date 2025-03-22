@@ -1,33 +1,47 @@
 ## **Cloud SOC Lab for Advanced Security: Threat Detection and Response with SIEM (Microsoft Sentinel) Implementation**.
+
+## Overview
+This project aims to establish a Cloud Security Operations Center (SOC) Lab to enhance advanced threat detection and response capabilities. By leveraging Microsoft Sentinel as the Security Information and Event Management (SIEM) solution, the lab provides centralized monitoring, real-time analysis, and automated incident response for a hybrid environment. The implementation focuses on integrating diverse data sources, crafting effective detection rules, and deploying playbooks to mitigate risks. This initiative is designed to simulate real-world scenarios, providing robust security insights and a platform for hands-on experimentation in addressing modern cyber threats.
+
+   **SCHEMATIC DIAGRAM OF THE PROJECT**
+
+  ![DRAW IO drawio 2 (2)](https://github.com/user-attachments/assets/4af2fb53-35c8-4927-84f2-ef45002ac41b)
+
  
  ## Objective
   This project is to design, implement, and showcase a comprehensive Security Operations Center (SOC) lab in the cloud. This SOC lab will leverage Microsoft Sentinel to provide advanced threat detection, real-time monitoring, and automated response capabilities. The project aims to demonstrate proficiency in setting up a cloud-based SOC environment, integrating various data sources, implementing Analytic rules for threat detection, workbook for threat visualization, Threat Intelligence Integration such as threat feed  and watch lists to track and monitor indicators of compromise (IOCs) and automating incident response workflows with Logic Apps in either real time or simulated alerts.
 
   ## Skills Learned
   - __Cloud Infrastructure Setup__: Proficiency in deploying and configuring virtual machines, storage accounts, and network security groups in Azure. Ability to manage and organize cloud resources effectively using Azure Resource Manager (ARM) templates and Azure portal.
+ 
   - __Identitiy And Access Management( Microsoft Entra ID)__ Gained proficiency in Identity and Access Management (IAM) using Microsoft Entra ID (formerly Azure Active Directory), including user provisioning, RBAC role assignment, and log integration with Sentinel for enhanced security monitoring.
+ 
   - __Webserver Deployment:__ Proficient in deploying and configuring web servers, such as Nginx, on Azure VMs to ensure optimal performance and scalability in cloud environments.
+  
   - __SIEM Implementation__:Expertise in setting up Microsoft Sentinel in a Log Analytics workspace. Integration of multiple data sources (e.g., Azure Activity Logs, SecurityEvent, network logs, storage logs) into Microsoft Sentinel for centralized monitoring.
+ 
   - __KQL__: Use of Kusto Query Language (KQL) to query, analyze, and visualize security logs and events.
+ 
   - __Security Monitoring and Incident Management__: Continuous monitoring of security alerts and incidents in Microsoft Sentinel and the Use of Sentinel's investigation tools to analyze and respond to security incidents.
     
 
   ### Tools Used For this Project
+
 - __Draw.io__ for diagram mapping.
+
 - __Azure Portal:__ To manage and configure Azure resources, such as virtual machines, storage accounts, and virtual networks, NSGs, Storage Account.
+
 - __Microsoft Entra ID:__ Utilized Microsoft Entra ID for robust identity and access management, including user provisioning, RBAC role assignment, and secure integration of sign-in and audit logs with Microsoft Sentinel for comprehensive security monitoring.
+
 - __Microsoft Sentinel:__ The primary SIEM solution for log collection, analysis, threat detection, and incident response. Watchlist, Analytic Rules, Azure Logic Apps were explored.
+
 - __Log Analytics Workspace:__ For collecting and analyzing log data from various sources.
+
 - __Kusto Query Language (KQL):__ To query, analyze, and visualize log data in the Log.
+
 - __Powershell:__ To ping Virtual machine.
+
 - __Diagnostic Settings__: To configure and send logs from Azure resources to the Log Analytics workspace.
-
-    **SCHEMATIC DIAGRAM OF THE PROJECT**
-
-  ![DRAW IO drawio 2 (2)](https://github.com/user-attachments/assets/4af2fb53-35c8-4927-84f2-ef45002ac41b)
-
-
-
 
 ## Steps
 - **Step 1: Provisioning of resources that is to be monitored**
